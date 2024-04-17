@@ -164,7 +164,7 @@ const DetailsProducts = () => {
                     <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "30px" }}>
                         <Box sx={{ display: "flex", alignItems: "center" }}>
                             <span className='text-price'>Precio:</span>
-                            <Box className='text-price2'>${product.price}</Box>
+                            <Box className='text-price2'>$ {product.price} </Box>
                         </Box>
                         <Box>
                             <ButtonBig onClick={ userId ? () => addProduct(): () => dontProduct()}>

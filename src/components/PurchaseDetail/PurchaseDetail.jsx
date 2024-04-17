@@ -9,14 +9,18 @@ import { currencyFormat } from "../../helpers/currencyFormat.js";
 
 
 const PurchaseDetail = ({ updateCartItem, cartItems }) => {
+
     console.log(cartItems);
     const carts = cartItems && cartItems.filter((item) => item.quantity>0)
     console.log(carts);
      
     // const image_url = import.meta.env.VITE_URL_BASE
-
+    
+    
     const handleIn = async (product) => {
+
         const { product_id, detail_id, cart_id } = product;
+
         try {
             await updateCartItem(product_id, detail_id, cart_id, "increase")
         } catch (err) {
@@ -69,7 +73,7 @@ const PurchaseDetail = ({ updateCartItem, cartItems }) => {
                             }} 
                             className="shopping-card-content"
                     >
-                        <Typography variant="p" style={{ fontSize: "1.2em", marginBottom: "4px" }} >{cart.detail}</Typography>
+                        <Typography variant="p" style={{ fontSize: "1.2em", marginBottom: "4px" }} >{cart.name}</Typography>
                         <Typography variant="p" style={{ fontSize: "1em"}}> <strong><em>vendido por</em></strong> <a href="#">petcos Spa</a></Typography>
     
                     </Box>

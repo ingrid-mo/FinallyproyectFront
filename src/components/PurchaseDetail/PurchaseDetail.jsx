@@ -12,7 +12,8 @@ const PurchaseDetail = ({ updateCartItem, cartItems }) => {
     console.log(cartItems);
     const carts = cartItems && cartItems.filter((item) => item.quantity>0)
     console.log(carts);
-    
+     
+    const image_url = import.meta.env.VITE_URL_BASE
     const handleIn = async (product) => {
         const { product_id, detail_id, cart_id } = product;
         try {
@@ -52,7 +53,7 @@ const PurchaseDetail = ({ updateCartItem, cartItems }) => {
                                     height: "-moz-available",  
                                 }}
                             className="shopping-card-image"
-                            src={cart.detail}
+                            src={`${image_url}${cart.image_url}`}
                             alt={cart.detail}
                         />
                     </Box>

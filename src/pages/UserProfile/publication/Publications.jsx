@@ -5,9 +5,7 @@ import Select from "@mui/material/Select";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemText from "@mui/material/ListItemText";
-// import { FaRegImage } from "react-icons/fa6";
-// import { Button } from "@mui/material";
-// import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+
 
 import "./style.css";
 import TextField from "@mui/material/TextField";
@@ -15,6 +13,7 @@ import { createNewProduct, getCategories } from "../../../api/getApi";
 import { AuthContext } from "../../../context/AuthContext";
 import swal from 'sweetalert';
 import CircularProgress from '@mui/material/CircularProgress';
+import { FormControl } from "@mui/material";
 
 const Publications = () => {
 
@@ -111,6 +110,8 @@ const Publications = () => {
             alignItems: "center",
           }}>
           <div>
+         
+            <FormControl  sx={{ width: '30ch' }}>
             <TextField
               required
               id="filled"
@@ -120,8 +121,10 @@ const Publications = () => {
               value={productname}
               onChange={(e) => setProductname(e.target.value)}
             />
+            </FormControl>
           </div>
           <div>
+          <FormControl  sx={{ width: '30ch' }}>
             <TextField
               required
               id="filled"
@@ -132,8 +135,10 @@ const Publications = () => {
               value={price}
               onChange={(e) => setPrice(e.target.value)}
             />
+            </FormControl>
           </div>
           <div>
+          <FormControl  sx={{ width: '30ch' }}>
             <TextField
               required
               id="filled-required"
@@ -144,8 +149,10 @@ const Publications = () => {
               value={stock}
               onChange={(e) => setStock(e.target.value)}
             />
+            </FormControl>
           </div>
           <div>
+          <FormControl  sx={{ width: '30ch' }}>
             <TextField
               id="outlined-multiline-static"
               label="Nombre detallado"
@@ -156,8 +163,10 @@ const Publications = () => {
               onChange={(e) => setDetailname(e.target.value)}
               value={detailname}
             />
+            </FormControl>
           </div>
           <div>
+          <FormControl  sx={{ width: '30ch' }}>
             <TextField
               id="outlined-multiline-static"
               label="Detalles de producto"
@@ -168,8 +177,10 @@ const Publications = () => {
               value={details}
               onChange={(e) => setDetails(e.target.value)}
             />
+            </FormControl>
           </div>
           <div className="publication_category">
+          <FormControl  sx={{ width: '30ch' }}>
             <label htmlFor="category">
               Seleciona una categoría para tu producto
             </label>
@@ -186,18 +197,10 @@ const Publications = () => {
                 </MenuItem>
               ))}
             </Select>
+            </FormControl>
           </div>
           <div className="publication_button">
-            {/* <Button
-              component="label"
-              role={undefined}
-              variant="contained"
-              tabIndex={-1}
-              startIcon={<CloudUploadIcon />}
-            >
-              Sube la imagen de tu producto aquí <FaRegImage />
-            </Button> */}
-      
+          
             <input
                 
                 type="file"

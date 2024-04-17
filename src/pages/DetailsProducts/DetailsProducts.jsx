@@ -7,7 +7,7 @@ import StarIcon from '@mui/icons-material/Star';
 import ButtonBig from '../../components/Buttons/buttonBig/buttonBig';
 import { DataContext } from '../../context/DataContext.jsx';
 import { useContext } from 'react';
-import { AuthContext } from "../context/AuthContext.jsx";
+import {AuthContext} from '../../context/AuthContext.jsx';
 import "./styles.css";
 import { getProductsById, getReviewsByProduct } from '../../api/getApi';
 import swal from "sweetalert";

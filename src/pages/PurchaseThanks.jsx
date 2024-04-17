@@ -38,11 +38,7 @@ const PurchaseThanks = () => {
                 alignItems: 'center',
             }}
             >
-                <ButtonBig to="/my-shopping">
-                    <Typography sx={{ ...textStyle }}>
-                        Ver mis compras
-                    </Typography>
-                </ButtonBig>
+               
                 <ButtonBig to="/">
                     <Typography sx={{ ...textStyle }}>
                         Volver a Home

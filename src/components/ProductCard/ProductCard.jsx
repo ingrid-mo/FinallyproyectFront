@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import { Box, CardActions } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import StarIcon from '@mui/icons-material/Star';
+
 import './styles.css';
 import ButtonLittle from '../Buttons/buttonLittle/buttonLittle';
 import ButtonLittleoutline from '../Buttons/buttonLittleoutline/buttonLittleoutline';
@@ -146,12 +146,6 @@ export default function ProductCard({ product, favorite }) {
         <Typography variant="body2" color="textSecondary" component={'span'} sx={{ display: 'flex', justifyContent: "space-between" }} >
           <Box>
             Vendido por : <Box className='link-text' >{product.name_user}</Box>
-          </Box>
-          <Box>
-            <IconButton>
-              <StarIcon fontSize='large' sx={{ color: "#efe648" }} />
-            </IconButton>
-            ({product.valoration})
           </Box>
         </Typography>
         <Typography

@@ -5,19 +5,27 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 import StarIcon from '@mui/icons-material/Star';
 import ButtonBig from '../../components/Buttons/buttonBig/buttonBig';
-
-
+import { DataContext } from '../../context/DataContext.jsx';
+import { useContext } from 'react';
+import { AuthContext } from "../context/AuthContext.jsx";
 import "./styles.css";
 import { getProductsById, getReviewsByProduct } from '../../api/getApi';
+import swal from "sweetalert";
+
+
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 const DetailsProducts = () => {
+    const {addCartItem} = useContext(DataContext)
+    const { userId } = useContext(AuthContext);
     const { id } = useParams();
     const [isShowInformation, setIsShowInformation] = useState(undefined);
     const [product, setProduct] = useState([]);
     const [reviews, setReviews] = useState([]);
     const navigate = useNavigate();
     const image_url = import.meta.env.VITE_URL_BASE
-
+    const [openSnack, setOpenSnack] = useState(false)
 
     useEffect(() => {
         asyncGetProduct();
@@ -25,11 +33,12 @@ const DetailsProducts = () => {
     }, []);
 
     const addProduct = async () => {
+
         try {
-            await addCartItem(userId, product_id, 1, price);
+            await addCartItem(userId, product.product_id,1 , product.product.price);
             console.log("Se añadio el producto al carrito con exito");
-            toast(' ¡Excelente! su producto fue añadido al carrito',);
-        } catch (err) {
+            setOpenSnack(true);
+                } catch (err) {
             console.error("Error al cargar producto al carrito", err);
         }
     }
@@ -41,7 +50,7 @@ const DetailsProducts = () => {
     const asyncGetProduct = async () => {
         try {
             const response = await getProductsById(id);
-            console.log(response)        
+            console.log(response)
             setProduct(response.response)
         } catch (error) {
             console.log(error);
@@ -71,24 +80,41 @@ const DetailsProducts = () => {
         navigate(-1)
     }
 
-   
-const convertirFechaZ = (fechaZulu) =>{
- 
-    const fecha = new Date(fechaZulu);
-    const offset = fecha.getTimezoneOffset();
-    const GmtMenos4 = offset - (4 * 60);
-  
-    fecha.setMinutes(fecha.getMinutes() + GmtMenos4);
-  
-    const fechaGMTmenos4 = fecha.toISOString().split("T")[0];
-    
-    return fechaGMTmenos4;
-  }
 
+    const convertirFechaZ = (fechaZulu) => {
+
+        const fecha = new Date(fechaZulu);
+        const offset = fecha.getTimezoneOffset();
+        const GmtMenos4 = offset - (4 * 60);
+
+        fecha.setMinutes(fecha.getMinutes() + GmtMenos4);
+
+        const fechaGMTmenos4 = fecha.toISOString().split("T")[0];
+
+        return fechaGMTmenos4;
+    }
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setOpenSnack(false);
+      };
 
     return (
         <>
             <Box sx={{ marginTop: "3%", marginLeft: "3%" }}>
+            <Snackbar open={openSnack} autoHideDuration={3000} onClose={handleClose} >
+        <Alert
+          onClose={handleClose}
+          severity="success"
+          style={{ backgroundColor: 'var(--background-btn1)' }}
+          variant="filled"
+          sx={{ width: '100%' }}
+        >
+          ¡Excelente! el producto fue añadido al carrito
+        </Alert>
+      </Snackbar>
                 <Typography
                     component={NavLink}
                     onClick={goBack}
@@ -119,14 +145,6 @@ const convertirFechaZ = (fechaZulu) =>{
                             alt={product.description}
                             loading="lazy"
                         />
-                        <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                            <Box>
-                                <StarIcon fontSize='large' sx={{ color: "#efe648" }} />
-                            </Box>
-                            <Box sx={{ fontSize: 'medium' }}>
-                                ({product.valoration})
-                            </Box>
-                        </Box>
                     </Box>
                 </Box>
 
@@ -149,7 +167,7 @@ const convertirFechaZ = (fechaZulu) =>{
                             <Box className='text-price2'>${product.price}</Box>
                         </Box>
                         <Box>
-                            <ButtonBig>
+                            <ButtonBig onClick={ userId ? () => addProduct(): () => dontProduct()}>
                                 Añadir al carro 🛒
                             </ButtonBig>
                         </Box>
@@ -177,7 +195,15 @@ const convertirFechaZ = (fechaZulu) =>{
                                         return (
                                             <Paper key={i} elevation={3} style={{ padding: '10px', marginBottom: '10px' }}>
                                                 <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                                                    <Typography variant="subtitle1">Autor : </Typography>
+
+                                                    <Typography variant="subtitle1" sx={{display:"flex"}}>
+                                                        <Box sx={{marginTop:"5px"}}>
+                                                            {commentary.rating}
+                                                        </Box>
+                                                        <Box>
+                                                            <StarIcon fontSize='large' sx={{ color: "#efe648" }} />
+                                                        </Box> 
+                                                    </Typography>
                                                     <Typography variant="subtitle1">Fecha Publicación : {convertirFechaZ(commentary.create_at)}</Typography>
                                                 </Box>
                                                 <Typography variant="body1">Comentario : {commentary.comment}</Typography>
@@ -197,7 +223,3 @@ const convertirFechaZ = (fechaZulu) =>{
 };
 
 export default DetailsProducts;
-
-
-
-

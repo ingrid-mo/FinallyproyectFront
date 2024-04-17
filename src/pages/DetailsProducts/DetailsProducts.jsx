@@ -35,7 +35,7 @@ const DetailsProducts = () => {
     const addProduct = async () => {
 
         try {
-            await addCartItem(userId, product.product_id,1 , product.product.price);
+            await addCartItem(userId, product.product_id,1 , product.price);
             console.log("Se añadio el producto al carrito con exito");
             setOpenSnack(true);
                 } catch (err) {

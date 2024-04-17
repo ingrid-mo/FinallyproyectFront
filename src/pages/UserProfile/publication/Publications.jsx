@@ -94,8 +94,8 @@ const Publications = () => {
   return (
     <div className="publication">
       <h1>Publica tus productos</h1>
+      <form onSubmit={handleSubmit} encType="multipart/form-data">
 
-      <form onSubmit={handleSubmit} >
 
 
           <Box

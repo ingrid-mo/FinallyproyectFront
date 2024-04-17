@@ -288,7 +288,7 @@ const createNewProduct = async (formData) => {
     const response = await axios.post(`/products`, formData, {
       headers: {
         'Authorization': `Bearer ${token}`,
-        'Content-Type': 'multipart/form-data' 
+     
       }
     });
     return { statusCode : response.request.status , response: response.data, error: null };
